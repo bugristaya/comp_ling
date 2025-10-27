@@ -21,7 +21,7 @@ class TextTokenizer:
         """
         # Реализация простой токенизации
         tokens = re.findall(r'\w+', text) # Токенизируем по пробелам и знакам препинания 
-        print("Токенизация по пробелам и знакам препинания:", tokens) # Выводим токены 
+        return tokens  # Возвращаем токены 
 
     def nltk_tokenize(self, text):
         """
@@ -36,7 +36,8 @@ class TextTokenizer:
         # Реализация NLTK токенизации
         try:
             from nltk.tokenize import word_tokenize # Импортируем модуль для токенизации по словам
-            print("NLTK токенизация:", word_tokenize(text)) # Токенизируем и выводим список токенов
+            tokens_nlkt = word_tokenize(text) # Токенизируем с помомщью NLTK
+            return tokens_nlkt # Возвращаем токены
         
         except ImportError: 
             print("Ошибка: NLTK не установлен.") # Ошибка, если библиотека не установлена 
@@ -54,9 +55,11 @@ class TextTokenizer:
         """
         # Реализация spaCy токенизации
         try:
-            #nlp = spacy.load("en_core_web_sm") 
-            doc = nlp(text) # Обрабатываем текст
-            print("spaCy токенизация:", [t.text for t in doc]) # Токенизируем и выводим список токенов
+            import spacy # Импортируем модуль
+            nlp = spacy.load("en_core_web_sm") 
+            doc = nlp(text) # Обрабатываем текст с помощью Spacy 
+            tokens_sp = [t.text for t in doc] # Токенизируем 
+            return tokens_sp # Возвращаем торины
             
         except ImportError:
             print("Ошибка: spaCy не установлен.") # Ошибка, если библиотека не установлена 
@@ -96,7 +99,7 @@ def demo():
     results = tokenizer.tokenize_all(sample_text)
     
     for method, tokens in results.items():
-        print(f"{method.upper()} токенизация: {tokens}") # Выводим результаты 
+        print(f"{method}: {tokens}") 
 
 if __name__ == "__main__":
     demo()
