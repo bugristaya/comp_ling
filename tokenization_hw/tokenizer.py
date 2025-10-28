@@ -91,8 +91,7 @@ def demo():
     
     # Пример текста для токенизации
     sample_text = "Hello, world! This is a test sentence. How are you today?"
-    print(f"Демонстрационный вариант")
-    print(f"Исходный текст: {sample_text}")
+    
     
     
     # Применяем все методы токенизации
